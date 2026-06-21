@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>OwnPad</title>
+
+    <link
+        rel="stylesheet"
+        href="ownpad.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ===================================== -->
+    <!-- MAIN SIDEBAR -->
+    <!-- Principle: Anticipation -->
+    <!-- ===================================== -->
+
+    <aside
+        id="sidebar"
+        class="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>OwnPad</h2>
+
+            <button
+                class="close-btn"
+                onclick="toggleSidebar()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="menu-section">
+
+            <div
+                class="menu-item"
+                onclick="toggleCategorySidebar()">
+
+                📝 Notes
+
+            </div>
+
+            <a
+                href="drafts.html"
+                class="menu-item">
+
+                📂 Drafts
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- CATEGORY SIDEBAR -->
+    <!-- CRUD Categories -->
+    <!-- ===================================== -->
+
+    <aside
+        id="categorySidebar"
+        class="category-sidebar">
+
+        <div class="category-header">
+
+            <h3>Categories</h3>
+
+            <button
+                class="close-category"
+                onclick="toggleCategorySidebar()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <!-- Search Category -->
+
+        <div class="category-search">
+
+            <input
+                type="text"
+                id="categorySearch"
+                placeholder="Search category...">
+
+        </div>
+
+        <!-- Dynamic Categories -->
+
+        <div
+            id="categoriesList"
+            class="categories-list">
+
+        </div>
+
+        <!-- Category CRUD -->
+
+        <div class="category-actions">
+
+            <button
+                id="addCategoryBtn"
+                class="add-category-btn">
+
+                ➕ Add Category
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- NAVBAR -->
+    <!-- ===================================== -->
+
+    <header class="navbar">
+
+        <button
+            class="menu-btn"
+            onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+        <h1>OwnPad</h1>
+
+    </header>
+
+    <!-- ===================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================== -->
+
+    <main class="container">
+
+        <!-- HERO -->
+
+        <section
+            class="hero-card reveal">
+
+            <h2>
+                My Notes
+            </h2>
+
+            <p>
+
+                Create notes, upload images,
+                organize by category,
+                manage drafts,
+                and stay productive.
+
+            </p>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- SEARCH NOTES -->
+        <!-- ===================================== -->
+
+        <section
+            class="form-card reveal">
+
+            <input
+                type="text"
+                id="searchNote"
+                placeholder="Search notes...">
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- NOTE FORM -->
+        <!-- ===================================== -->
+
+        <section
+            class="form-card reveal">
+
+            <form
+                id="noteForm">
+
+                <!-- TITLE -->
+
+                <input
+                    type="text"
+                    id="noteTitle"
+                    placeholder="Enter note title..."
+                    required>
+
+                <!-- CATEGORY -->
+
+                <select
+                    id="noteCategory"
+                    required>
+
+                </select>
+
+                <!-- CONTENT -->
+
+                <textarea
+                    id="noteContent"
+                    placeholder="Write your note..."
+                    required>
+
+                </textarea>
+
+                <!-- IMAGE -->
+
+                <label
+                    class="upload-label">
+
+                    📷 Add Image
+
+                </label>
+
+                <input
+                    type="file"
+                    id="noteImage"
+                    accept="image/*">
+
+                <!-- IMAGE PREVIEW -->
+
+                <div
+                    id="imagePreview"
+                    class="image-preview">
+
+                </div>
+
+                <!-- BUTTONS -->
+
+                <div
+                    class="button-group">
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        Save Note
+
+                    </button>
+
+                    <button
+                        type="reset"
+                        class="secondary-btn">
+
+                        Reset
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- CURRENT CATEGORY -->
+        <!-- ===================================== -->
+
+        <section
+            class="current-category reveal">
+
+            <h3>
+
+                Current Category:
+
+                <span
+                    id="currentCategory">
+
+                    All Notes
+
+                </span>
+
+            </h3>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- NOTE STATS -->
+        <!-- ===================================== -->
+
+        <section
+            class="stats-container reveal">
+
+            <div class="stat-card">
+
+                <h4>Total Notes</h4>
+
+                <span
+                    id="noteCount">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h4>Total Categories</h4>
+
+                <span
+                    id="categoryCount">
+
+                    0
+
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- NOTES GRID -->
+        <!-- Principle: Staging -->
+        <!-- ===================================== -->
+
+        <section
+            id="notesList"
+            class="notes-grid">
+
+        </section>
+
+    </main>
+
+    <!-- ===================================== -->
+    <!-- FLOATING BUTTON -->
+    <!-- Principle: Follow Through -->
+    <!-- ===================================== -->
+
+    <button
+        class="floating-btn"
+        onclick="scrollToTop()">
+
+        ↑
+
+    </button>
+
+    <!-- ===================================== -->
+    <!-- IMAGE MODAL -->
+    <!-- ===================================== -->
+
+    <div
+        id="imageModal"
+        class="image-modal">
+
+        <span
+            class="close-modal">
+
+            ✕
+
+        </span>
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Preview">
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- LOADING SCREEN -->
+    <!-- ===================================== -->
+
+    <div
+        id="loader"
+        class="loader">
+
+        <div
+            class="loader-circle">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- SCRIPTS -->
+    <!-- ===================================== -->
+
+    <script src="ownpad.js"></script>
+
+</body>
+</html>
