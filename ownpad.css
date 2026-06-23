@@ -1,0 +1,1682 @@
+/* =======================================================
+   OWNPAD V3
+   PART 1
+   THEME VARIABLES
+   ======================================================= */
+
+:root {
+
+    --cyan-bg: #00d4ff;
+    --cyan-light: #7ee8fa;
+
+    --white: #ffffff;
+
+    --soft-charcoal: #2f3640;
+    --charcoal-light: #444b55;
+
+    --royal-blue: #4169e1;
+    --royal-blue-dark: #2748b5;
+
+    --glass-bg: rgba(255,255,255,0.15);
+
+    --shadow:
+        0 10px 30px
+        rgba(0,0,0,0.15);
+
+    --radius: 18px;
+
+    --transition: .35s ease;
+}
+
+/* =======================================================
+   RESET
+   ======================================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: var(--soft-charcoal);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan-bg),
+            var(--cyan-light)
+        );
+
+    position: relative;
+}
+
+/* =======================================================
+   ANIMATED BACKGROUND
+   Principle:
+   Appeal
+   Secondary Action
+   Slow In & Slow Out
+   ======================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 300%;
+    height: 300%;
+
+    top: -100%;
+    left: -100%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.25),
+            transparent 60%
+        ),
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.15),
+            transparent 50%
+        ),
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.10),
+            transparent 40%
+        );
+
+    animation:
+        floatingBackground
+        25s linear infinite;
+
+    z-index: -2;
+}
+
+@keyframes floatingBackground {
+
+    0% {
+
+        transform:
+            rotate(0deg)
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            rotate(180deg)
+            translateY(-50px);
+    }
+
+    100% {
+
+        transform:
+            rotate(360deg)
+            translateY(0);
+    }
+}
+
+/* =======================================================
+   CUSTOM SCROLLBAR
+   ======================================================= */
+
+::-webkit-scrollbar {
+
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+
+    background: rgba(255,255,255,.25);
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: var(--royal-blue);
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+    background:
+        var(--royal-blue-dark);
+}
+
+/* =======================================================
+   LOADER
+   Principle:
+   Timing
+   ======================================================= */
+
+.loader {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan-bg),
+            var(--cyan-light)
+        );
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.loader-circle {
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    border: 6px solid
+        rgba(255,255,255,.3);
+
+    border-top:
+        6px solid
+        var(--white);
+
+    animation:
+        spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+    from {
+
+        transform:
+            rotate(0deg);
+    }
+
+    to {
+
+        transform:
+            rotate(360deg);
+    }
+}
+
+/* =======================================================
+   NAVBAR
+   ======================================================= */
+
+.navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    gap: 15px;
+
+    padding:
+        18px 25px;
+
+    backdrop-filter:
+        blur(18px);
+
+    background:
+        rgba(255,255,255,.2);
+
+    box-shadow:
+        var(--shadow);
+
+    z-index: 1000;
+}
+
+.navbar h1 {
+
+    color:
+        var(--white);
+
+    font-size:
+        1.5rem;
+
+    font-weight:
+        700;
+}
+
+.menu-btn {
+
+    border: none;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 1.3rem;
+
+    background:
+        var(--royal-blue);
+
+    color:
+        var(--white);
+
+    transition:
+        var(--transition);
+}
+
+/* Principle:
+   Squash & Stretch
+*/
+
+.menu-btn:hover {
+
+    transform:
+        scale(1.08);
+}
+
+.menu-btn:active {
+
+    transform:
+        scale(.92);
+}
+
+/* =======================================================
+   MAIN SIDEBAR
+   Principle:
+   Anticipation
+   ======================================================= */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: -280px;
+
+    width: 280px;
+    height: 100%;
+
+    background:
+        rgba(255,255,255,.25);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        .4s ease;
+
+    z-index: 2000;
+
+    overflow-y: auto;
+}
+
+.sidebar.open {
+
+    left: 0;
+}
+
+.sidebar-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    padding: 20px;
+}
+
+.sidebar-header h2 {
+
+    color:
+        var(--royal-blue);
+
+    font-size: 1.4rem;
+}
+
+.close-btn {
+
+    border: none;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background:
+        crimson;
+
+    color:
+        white;
+
+    transition:
+        var(--transition);
+}
+
+.close-btn:hover {
+
+    transform:
+        rotate(90deg);
+}
+
+.menu-section {
+
+    padding: 15px;
+}
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+    padding:
+        14px 16px;
+
+    border-radius:
+        12px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    color:
+        var(--soft-charcoal);
+
+    font-weight: 500;
+
+    background:
+        rgba(255,255,255,.25);
+
+    transition:
+        var(--transition);
+}
+
+.menu-item:hover {
+
+    background:
+        var(--royal-blue);
+
+    color:
+        white;
+
+    transform:
+        translateX(5px);
+}
+
+.menu-item.active {
+
+    background:
+        var(--royal-blue);
+
+    color:
+        white;
+}
+
+.menu-item.danger:hover {
+
+    background:
+        crimson;
+}
+
+/* =======================================================
+   CATEGORY SIDEBAR
+   ======================================================= */
+
+.category-sidebar {
+
+    position: fixed;
+
+    top: 0;
+    right: -320px;
+
+    width: 320px;
+    height: 100%;
+
+    background:
+        rgba(255,255,255,.25);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        .4s ease;
+
+    z-index: 1999;
+
+    overflow-y: auto;
+}
+
+.category-sidebar.open {
+
+    right: 0;
+}
+
+.category-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    padding: 20px;
+}
+
+.category-header h3 {
+
+    color:
+        var(--royal-blue);
+}
+
+.close-category {
+
+    border: none;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background:
+        crimson;
+
+    color:
+        white;
+}
+
+.category-search {
+
+    padding:
+        0 20px 20px;
+}
+
+.category-search input {
+
+    width: 100%;
+
+    padding:
+        12px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    outline: none;
+}
+
+.categories-list {
+
+    padding: 0 15px 15px;
+}
+
+.category-item {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    padding:
+        12px;
+
+    border-radius:
+        12px;
+
+    background:
+        rgba(255,255,255,.3);
+
+    cursor: pointer;
+
+    transition:
+        var(--transition);
+}
+
+.category-item:hover {
+
+    background:
+        var(--royal-blue);
+
+    color:
+        white;
+}
+
+.category-buttons {
+
+    display: flex;
+    gap: 5px;
+}
+
+.category-buttons button {
+
+    border: none;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+/* =======================================================
+   CONTAINER
+   ======================================================= */
+
+.container {
+
+    width: min(1200px, 95%);
+
+    margin: 30px auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* =======================================================
+   HERO CARD
+   Principle:
+   Staging
+   Appeal
+   ======================================================= */
+
+.hero-card {
+
+    padding: 30px;
+
+    border-radius: var(--radius);
+
+    background:
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        var(--shadow);
+
+    text-align: center;
+
+    color: var(--white);
+}
+
+.hero-card h2 {
+
+    font-size: 2rem;
+
+    margin-bottom: 10px;
+}
+
+.hero-card p {
+
+    font-size: 1rem;
+
+    opacity: .95;
+}
+
+/* =======================================================
+   FORM CARD
+   ======================================================= */
+
+.form-card {
+
+    padding: 25px;
+
+    border-radius: var(--radius);
+
+    background:
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        var(--shadow);
+}
+
+/* =======================================================
+   INPUTS
+   ======================================================= */
+
+.form-card input[type="text"],
+.form-card select,
+.form-card textarea {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 14px;
+
+    margin-bottom: 15px;
+
+    padding: 14px 16px;
+
+    font-family: inherit;
+
+    font-size: .95rem;
+
+    background:
+        rgba(255,255,255,.9);
+
+    color:
+        var(--soft-charcoal);
+
+    transition:
+        var(--transition);
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+
+    box-shadow:
+        0 0 0 3px
+        rgba(65,105,225,.25);
+}
+
+/* =======================================================
+   TEXTAREA
+   ======================================================= */
+
+.form-card textarea {
+
+    resize: vertical;
+
+    min-height: 180px;
+
+    line-height: 1.6;
+}
+
+/* =======================================================
+   FILE INPUT
+   ======================================================= */
+
+.upload-label {
+
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    background:
+        var(--royal-blue);
+
+    color:
+        white;
+
+    cursor: pointer;
+
+    transition:
+        var(--transition);
+}
+
+.upload-label:hover {
+
+    background:
+        var(--royal-blue-dark);
+}
+
+#noteImage {
+
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 15px;
+}
+
+/* =======================================================
+   IMAGE PREVIEW
+   ======================================================= */
+
+.image-preview {
+
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+.preview-image {
+
+    max-width: 100%;
+
+    max-height: 300px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    box-shadow:
+        var(--shadow);
+
+    animation:
+        fadeIn .5s ease;
+}
+
+/* =======================================================
+   BUTTON GROUP
+   ======================================================= */
+
+.button-group {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+/* =======================================================
+   BUTTONS
+   Principle:
+   Squash & Stretch
+   ======================================================= */
+
+.primary-btn,
+.secondary-btn {
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    transition:
+        var(--transition);
+}
+
+.primary-btn {
+
+    background:
+        var(--royal-blue);
+
+    color:
+        white;
+}
+
+.primary-btn:hover {
+
+    background:
+        var(--royal-blue-dark);
+
+    transform:
+        translateY(-2px);
+}
+
+.primary-btn:active {
+
+    transform:
+        scale(.95);
+}
+
+.secondary-btn {
+
+    background:
+        rgba(255,255,255,.85);
+
+    color:
+        var(--soft-charcoal);
+}
+
+.secondary-btn:hover {
+
+    transform:
+        translateY(-2px);
+}
+
+.secondary-btn:active {
+
+    transform:
+        scale(.95);
+}
+
+/* =======================================================
+   CURRENT CATEGORY
+   ======================================================= */
+
+.current-category {
+
+    padding: 18px 22px;
+
+    border-radius: var(--radius);
+
+    background:
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        var(--shadow);
+
+    color:
+        white;
+}
+
+.current-category span {
+
+    color:
+        #eaf2ff;
+
+    font-weight: 700;
+}
+
+/* =======================================================
+   STATS
+   ======================================================= */
+
+.stats-container {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+
+    gap: 20px;
+}
+
+.stat-card {
+
+    padding: 20px;
+
+    border-radius: var(--radius);
+
+    background:
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        var(--shadow);
+
+    text-align: center;
+
+    color:
+        white;
+}
+
+.stat-card h4 {
+
+    margin-bottom: 10px;
+}
+
+.stat-card span {
+
+    font-size: 2rem;
+
+    font-weight: 700;
+}
+
+/* =======================================================
+   NOTES GRID
+   ======================================================= */
+
+.notes-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill,minmax(300px,1fr));
+
+    gap: 20px;
+}
+
+/* =======================================================
+   NOTE CARD
+   Principle:
+   Staging
+   Appeal
+   ======================================================= */
+
+.note {
+
+    padding: 20px;
+
+    border-radius: var(--radius);
+
+    background:
+        rgba(255,255,255,.2);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        var(--transition);
+
+    overflow: hidden;
+}
+
+.note:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.18);
+}
+
+.note-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+.note-header h3 {
+
+    color:
+        var(--soft-charcoal);
+
+    word-break: break-word;
+}
+
+.note-category {
+
+    padding:
+        6px 12px;
+
+    border-radius:
+        999px;
+
+    background:
+        var(--royal-blue);
+
+    color:
+        white;
+
+    font-size: .75rem;
+
+    white-space: nowrap;
+}
+
+.note-content {
+
+    margin: 15px 0;
+
+    line-height: 1.6;
+
+    color:
+        var(--soft-charcoal);
+
+    word-break: break-word;
+}
+
+.note small {
+
+    display: block;
+
+    margin-bottom: 15px;
+
+    opacity: .75;
+}
+
+/* =======================================================
+   NOTE IMAGE
+   ======================================================= */
+
+.note-image {
+
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+
+    margin-bottom: 15px;
+
+    cursor: pointer;
+
+    transition:
+        var(--transition);
+}
+
+.note-image:hover {
+
+    transform:
+        scale(1.03);
+}
+
+/* =======================================================
+   NOTE ACTIONS
+   ======================================================= */
+
+.note-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn {
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    transition:
+        var(--transition);
+}
+
+.edit-btn {
+
+    background:
+        var(--royal-blue);
+}
+
+.edit-btn:hover {
+
+    background:
+        var(--royal-blue-dark);
+}
+
+.delete-btn {
+
+    background:
+        crimson;
+}
+
+.delete-btn:hover {
+
+    opacity: .9;
+}
+
+/* =======================================================
+   EMPTY NOTE
+   ======================================================= */
+
+.empty-note {
+
+    text-align: center;
+
+    color: white;
+}
+/* =======================================================
+   IMAGE MODAL
+   Principle:
+   Staging
+   Appeal
+   ======================================================= */
+
+.image-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.85);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 5000;
+
+    padding: 20px;
+}
+
+.image-modal.show {
+
+    display: flex;
+
+    animation:
+        fadeIn .3s ease;
+}
+
+.image-modal img {
+
+    max-width: 90%;
+    max-height: 90vh;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.4);
+
+    animation:
+        zoomIn .3s ease;
+}
+
+.close-modal {
+
+    position: absolute;
+
+    top: 20px;
+    right: 30px;
+
+    font-size: 2rem;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        var(--transition);
+}
+
+.close-modal:hover {
+
+    transform:
+        rotate(90deg);
+}
+
+/* =======================================================
+   FLOATING BUTTON
+   Principle:
+   Follow Through
+   Arc
+   ======================================================= */
+
+.floating-btn {
+
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 1.4rem;
+
+    color: white;
+
+    background:
+        var(--royal-blue);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.2);
+
+    z-index: 999;
+
+    transition:
+        var(--transition);
+
+    animation:
+        floatingButton 3s ease-in-out infinite;
+}
+
+.floating-btn:hover {
+
+    transform:
+        scale(1.1);
+}
+
+.floating-btn:active {
+
+    transform:
+        scale(.9);
+}
+
+@keyframes floatingButton {
+
+    0% {
+
+        transform:
+            translateY(0px);
+    }
+
+    50% {
+
+        transform:
+            translateY(-8px);
+    }
+
+    100% {
+
+        transform:
+            translateY(0px);
+    }
+}
+
+/* =======================================================
+   FOOTER
+   ======================================================= */
+
+.footer {
+
+    margin-top: 50px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: white;
+
+    opacity: .9;
+}
+
+/* =======================================================
+   REVEAL ANIMATIONS
+   Principle:
+   Timing
+   Slow In & Slow Out
+   Staging
+   ======================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(40px);
+
+    transition:
+        all .8s ease;
+}
+
+.reveal.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+/* =======================================================
+   ADD CATEGORY BUTTON
+   ======================================================= */
+
+.add-category-btn {
+
+    width: calc(100% - 30px);
+
+    margin: 15px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background:
+        var(--royal-blue);
+
+    color: white;
+
+    font-weight: 600;
+
+    transition:
+        var(--transition);
+}
+
+.add-category-btn:hover {
+
+    background:
+        var(--royal-blue-dark);
+}
+
+/* =======================================================
+   ANIMATION KEYFRAMES
+   ======================================================= */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+    }
+
+    to {
+
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.8);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+/* =======================================================
+   PRINCIPLE:
+   Secondary Action
+   Decorative Glow
+   ======================================================= */
+
+.hero-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.15);
+
+    top: -40px;
+    right: -40px;
+
+    pointer-events: none;
+}
+
+/* =======================================================
+   TABLET RESPONSIVE
+   ======================================================= */
+
+@media (max-width: 992px) {
+
+    .container {
+
+        width: 96%;
+    }
+
+    .notes-grid {
+
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(280px,1fr)
+            );
+    }
+}
+
+/* =======================================================
+   MOBILE RESPONSIVE
+   Principle:
+   Staging
+   ======================================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+
+        padding:
+            15px;
+    }
+
+    .navbar h1 {
+
+        font-size:
+            1.2rem;
+    }
+
+    .sidebar {
+
+        width: 260px;
+    }
+
+    .category-sidebar {
+
+        width: 280px;
+    }
+
+    .hero-card {
+
+        padding: 20px;
+    }
+
+    .hero-card h2 {
+
+        font-size:
+            1.6rem;
+    }
+
+    .form-card {
+
+        padding: 18px;
+    }
+
+    .button-group {
+
+        flex-direction: column;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+
+        width: 100%;
+    }
+
+    .stats-container {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .notes-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .note-header {
+
+        flex-direction: column;
+
+        align-items:
+            flex-start;
+    }
+
+    .floating-btn {
+
+        width: 50px;
+        height: 50px;
+
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .image-modal img {
+
+        max-width: 95%;
+    }
+}
+
+/* =======================================================
+   SMALL MOBILE
+   ======================================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+
+        width: 98%;
+    }
+
+    .hero-card h2 {
+
+        font-size:
+            1.4rem;
+    }
+
+    .hero-card p {
+
+        font-size:
+            .9rem;
+    }
+
+    .navbar h1 {
+
+        font-size:
+            1rem;
+    }
+
+    .menu-btn {
+
+        width: 40px;
+        height: 40px;
+    }
+
+    .note {
+
+        padding: 15px;
+    }
+
+    .note-image {
+
+        height: 180px;
+    }
+
+    .stat-card span {
+
+        font-size:
+            1.5rem;
+    }
+}
+
+/* =======================================================
+   ACCESSIBILITY
+   ======================================================= */
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+
+    outline: 3px solid
+        rgba(65,105,225,.35);
+
+    outline-offset: 2px;
+}
+
+/* =======================================================
+   FINAL POLISH
+   Principle:
+   Appeal
+   Solid Drawing
+   Exaggeration
+   ======================================================= */
+
+.note,
+.hero-card,
+.form-card,
+.stat-card,
+.current-category {
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+}
+
+.note:hover,
+.stat-card:hover,
+.hero-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    transition:
+        .3s ease;
+}
+
+.category-name {
+
+    font-weight: 600;
+
+    flex: 1;
+}
+
+.category-item.active {
+
+    background: var(--royal-blue);
+
+    color: white;
+}

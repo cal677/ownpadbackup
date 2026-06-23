@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>OwnPad Drafts</title>
+
+    <link
+        rel="stylesheet"
+        href="ownpad.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ===================================== -->
+    <!-- LOADER -->
+    <!-- ===================================== -->
+
+    <div
+        id="loader"
+        class="loader">
+
+        <div
+            class="loader-circle">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside
+        id="sidebar"
+        class="sidebar">
+
+        <div
+            class="sidebar-header">
+
+            <h2>
+
+                OwnPad
+
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="toggleSidebar()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div
+            class="menu-section">
+
+            <a
+                href="ownpad.html"
+                class="menu-item">
+
+                📝 Notes
+
+            </a>
+
+            <a
+                href="drafts.html"
+                class="menu-item active">
+
+                📂 Drafts
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- NAVBAR -->
+    <!-- ===================================== -->
+
+    <header
+        class="navbar">
+
+        <button
+            class="menu-btn"
+            onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+        <h1>
+
+            Draft Manager
+
+        </h1>
+
+    </header>
+
+    <!-- ===================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================== -->
+
+    <main
+        class="container">
+
+        <!-- HERO -->
+
+        <section
+            class="hero-card reveal">
+
+            <h2>
+
+                My Drafts
+
+            </h2>
+
+            <p>
+
+                Continue unfinished work,
+                review saved drafts,
+                and organize your ideas.
+
+            </p>
+
+        </section>
+
+        <!-- SEARCH -->
+
+        <section
+            class="form-card reveal">
+
+            <input
+                type="text"
+                id="searchDraft"
+                placeholder="Search drafts...">
+
+            <div
+                class="button-group">
+
+                <button
+                    class="secondary-btn"
+                    onclick="clearAllDrafts()">
+
+                    Delete All Drafts
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- STATS -->
+
+        <section
+            class="stats-container reveal">
+
+            <div
+                class="stat-card">
+
+                <h4>
+
+                    Total Drafts
+
+                </h4>
+
+                <span
+                    id="draftCount">
+
+                    0
+
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- DRAFTS GRID -->
+
+        <section
+            id="draftsList"
+            class="notes-grid">
+
+        </section>
+
+    </main>
+
+    <!-- ===================================== -->
+    <!-- FLOATING SCROLL BUTTON -->
+    <!-- ===================================== -->
+
+    <button
+        class="floating-btn"
+        onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+        ↑
+
+    </button>
+
+    <!-- ===================================== -->
+    <!-- FOOTER -->
+    <!-- ===================================== -->
+
+    <footer
+        class="footer">
+
+        <p>
+
+            OwnPad Draft Manager © 2026
+
+        </p>
+
+    </footer>
+
+    <!-- ===================================== -->
+    <!-- SCRIPT -->
+    <!-- ===================================== -->
+
+    <script src="drafts.js"></script>
+
+</body>
+
+</html>
