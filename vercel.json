@@ -1,4 +1,14 @@
 {
   "version": 2,
-  "public": true
+  "public": true,
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }
