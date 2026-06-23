@@ -1,3 +1,12 @@
 {
-  "version": 2
+  "version": 2,
+  "public": true,
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": ".",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }
